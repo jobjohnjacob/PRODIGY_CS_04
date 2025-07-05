@@ -18,7 +18,7 @@ PROJECT: Create a basic keylogger program that records and logs keystrokes.
 
 ---
 
-overview:
+Overview:
 
 This keylogger demonstrates how global keyboard input can be captured using Python's pynput module. It logs:
 
